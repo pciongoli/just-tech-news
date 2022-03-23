@@ -79,7 +79,7 @@ router.put('/:id', (req, res) => {
 // DELETE a user from the database
 // DELETE /api/users/1
 router.delete('/:id', (req, res) => {
-    User.delete('/:id', (req, res) => {
+    User.destroy({
         where: {
             id: req.params.id
         }
@@ -98,3 +98,9 @@ router.delete('/:id', (req, res) => {
 });
 
 module.exports = router;
+
+
+// ex ("/api/dogs/:id")  "/:id" notates that what is written in this section 
+// of the URL going to be captured as part of the req.params object
+// 
+// 
