@@ -1,6 +1,6 @@
 // import Model and DataTypes object from Sequelize
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 // create our User model
@@ -53,11 +53,15 @@ User.init(
         hooks: {
             // set up beforeCreate lifecycle "hook" functionality
             // changed to async/await syntax 
-            async beforeCreate(newuserData) {
-                newUserData.password = await bcrypt.hash(userData.password, 10);
+            async beforeCreate(newUserData) {
+                newUserData.password = await bcrypt.hash(newUserData.password, 10);
                 return newUserData;
-                
             },
+            // set up before update lifecycle "hook" functionality
+            async beforeUpdate(updatedUserData) {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+                return updatedUserData;
+            }
         },
         // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
 
