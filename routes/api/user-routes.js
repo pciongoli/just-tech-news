@@ -57,6 +57,28 @@ router.post('/', (req, res) => {
         });
 });
 
+// login route
+router.post('/login', (req, res) => {
+    // Query Operation
+    // expects {email: 'lernantino@gmail.com', password: 'password1234'}
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    }).then(dbUserData => {
+        if (!dbUserData) {
+            res.status(400).json({ message: 'No user with that email address!' });
+            return;
+        }
+
+        res.json({ user: dbUserData });
+
+        // Verify User
+
+    });
+});
+
+
 // PUT route to update existing data
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
