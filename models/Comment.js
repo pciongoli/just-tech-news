@@ -8,6 +8,7 @@ Comment.init(
         // columns go here
         id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
@@ -29,8 +30,10 @@ Comment.init(
         post_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: 'post',
+            references: { 
+            model: 'post',
             key: 'id'
+            }
         }
     },
     {
