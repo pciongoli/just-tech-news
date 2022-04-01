@@ -48,6 +48,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// create route to the single-post page via clicking the comment-count link
 router.get('/post/:id', (req, res) => {
   Post.findOne({
     where: {
@@ -87,7 +88,7 @@ router.get('/post/:id', (req, res) => {
       }
 
       // serialize the data
-      const post = dbPostData({ plain: true });
+      const post = dbPostData.get({ plain: true });
 
       // pass data to template
       res.render('single-post', { post });
