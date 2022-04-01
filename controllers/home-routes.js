@@ -6,6 +6,8 @@ const { Post, User, Comment } = require('../models');
 
 // get all posts for homepage
 router.get('/', (req, res) => {
+  // console-log the session variables
+  console.log(req.session);
   Post.findAll({
     attributes: [
       'id',
@@ -46,8 +48,27 @@ router.get('/', (req, res) => {
     });
 });
 
+// login route
 router.get('/login', (req, res) => {
+  // check for a session and redirect to the homepage if one exists
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
   res.render('login');
+});
+
+// logout route
+router.post('/logout', (req, res) => {
+  // use the destroy method to clear the session
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
 });
 
 module.exports = router;

@@ -7,8 +7,6 @@ const { Post, User, Vote, Comment } = require('../../models');
 router.get('/', (req, res) => {
   console.log('======================');
   Post.findAll({
-    // Query configuration
-    order: [['created_at', 'DESC']],
     attributes: [
       'id',
       'post_url',
@@ -21,10 +19,8 @@ router.get('/', (req, res) => {
         'vote_count',
       ],
     ],
-    // adding in the order property to the findAll query
-    order: [['created_at', 'DESC']],
+    // include comment model here
     include: [
-      // include the Comment mdoel here:
       {
         model: Comment,
         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
