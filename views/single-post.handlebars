@@ -1,4 +1,3 @@
-{{! post }}
 <article class='post'>
   <div class='title'>
     <a href='{{post.post_url}}' target='_blank'>{{post.title}}</a>
@@ -15,21 +14,20 @@
   </div>
 </article>
 
-{{! form }}
-<form class='comment-form'>
-  <div>
-    <textarea name='comment-body'></textarea>
-  </div>
+{{#if loggedIn}}
+  <form class='comment-form'>
+    <div>
+      <textarea name='comment-body'></textarea>
+    </div>
 
-  <div>
-    <button type='submit'>add comment</button>
-    <button type='button' class='upvote-btn'>upvote</button>
-  </div>
-</form>
+    <div>
+      <button type='submit'>add comment</button>
+      <button type='button' class='upvote-btn'>upvote</button>
+    </div>
+  </form>
+{{/if}}
 
-{{! comments }}
 <div class='comments'>
-  {{! using each helper to iterate over the comments array }}
   {{#each post.comments}}
     <section class='comment'>
       <div class='meta'>
@@ -44,6 +42,7 @@
   {{/each}}
 </div>
 
-{{! references to the public/javascript files }}
-<script src='/javascript/comment.js'></script>
-<script src='/javascript/upvote.js'></script>
+{{#if loggedIn}}
+  <script src='/javascript/comment.js'></script>
+  <script src='/javascript/upvote.js'></script>
+{{/if}}
