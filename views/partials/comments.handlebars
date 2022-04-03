@@ -1,0 +1,17 @@
+{{! removed from single-post.handlebars in order to implement partial }}
+<div class='comments'>
+  {{! this is being looped over so all of the expressions within
+    the loop look for properties on each object in this }}
+  {{#each this}}
+    <section class='comment'>
+      <div class='meta'>
+        {{user.username}}
+        on
+        {{created_at}}
+      </div>
+      <div class='text'>
+        {{comment_text}}
+      </div>
+    </section>
+  {{/each}}
+</div>
